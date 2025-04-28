@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decentralized Home Insurance</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">HomeInsurance DApp</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#policy">Policy</a></li>
+          <li class="nav-item"><a class="nav-link" href="#payment">Pay Premium</a></li>
+          <li class="nav-item"><a class="nav-link" href="#claim">Submit Claim</a></li>
+          <li class="nav-item"><a class="nav-link" href="#view">View Policy</a></li>
+          <li class="nav-item"><a class="nav-link" href="#admin">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Container -->
+  <div class="container mt-4">
+    <!-- Home Section -->
+    <section id="home" class="section">
+      <h2>Welcome to the Decentralized Home Insurance DApp</h2>
+      <p>This platform enables homeowners to buy insurance, submit claims, and get payouts using Ethereum smart contracts.</p>
+      <button id="connectButton" class="btn btn-primary">Connect MetaMask</button>
+      <p id="walletAddress" class="mt-2 text-muted"></p>
+    </section>
+
+    <!-- Placeholder Sections -->
+    <section id="policy" class="section d-none">
+        <h2>Create a New Insurance Policy</h2>
+        <form id="policyForm">
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullName" required />
+          </div>
+          <div class="mb-3">
+            <label for="propertyAddress" class="form-label">Property Address</label>
+            <input type="text" class="form-control" id="propertyAddress" required />
+          </div>
+          <div class="mb-3">
+            <label for="contactNumber" class="form-label">Contact Number</label>
+            <input type="tel" class="form-control" id="contactNumber" required />
+          </div>
+          <div class="mb-3">
+            <label for="coverageType" class="form-label">Coverage Type</label>
+            <select class="form-select" id="coverageType" required>
+              <option value="">Select...</option>
+              <option value="basic">Basic</option>
+              <option value="standard">Standard</option>
+              <option value="premium">Premium</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Policy</button>
+        </form>
+        <p id="policyStatus" class="mt-3 text-success"></p>
+        
+      <!-- Form will go here -->
+    </section>
+
+    <section id="payment" class="section d-none">
+      <h2>Premium Payment Page</h2>
+      <h2>Pay Your Insurance Premium</h2>
+<p>Your premium amount: <strong>0.05 ETH</strong></p>
+<button id="payPremiumBtn" class="btn btn-success">Pay with MetaMask</button>
+<p id="paymentStatus" class="mt-3 text-info"></p>
+
+      <!-- Payment UI will go here -->
+    </section>
+
+    <section id="claim" class="section d-none">
+      <!-- Claim form will go here -->
+      <h2>Submit a Claim</h2>
+      <form id="claimForm">
+        <div class="mb-3">
+          <label for="claimDescription" class="form-label">Claim Description</label>
+          <textarea class="form-control" id="claimDescription" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-warning">Submit Claim</button>
+      </form>
+      <p id="claimStatus" class="mt-3 text-success"></p>
+      
+    </section>
+
+    <section id="view" class="section d-none">
+        <h2>My Policy Details</h2>
+        <button id="loadPolicyBtn" class="btn btn-outline-primary mb-3">Load My Policy</button>
+        
+        <div id="policyDetails" class="border rounded p-3 bg-light d-none">
+          <p><strong>Full Name:</strong> <span id="viewName"></span></p>
+          <p><strong>Address:</strong> <span id="viewAddress"></span></p>
+          <p><strong>Coverage:</strong> <span id="viewCoverage"></span></p>
+          <p><strong>Status:</strong> <span id="viewStatus"></span></p>
+        
+          <hr />
+        
+          <h5>Payment History</h5>
+          <ul id="paymentHistory">
+            <li>Payment on Jan 12, 2025 – 0.05 ETH</li>
+            <li>Payment on Feb 12, 2025 – 0.05 ETH</li>
+          </ul>
+        
+          <h5 class="mt-3">Claim History</h5>
+          <ul id="claimHistory">
+            <li>Claim submitted on Mar 2, 2025 – <em>Pending</em></li>
+          </ul>
+        </div>
+        
+        <p id="policyLoadStatus" class="text-muted mt-2"></p>
+        
+    </section>
+
+    <section id="admin" class="section d-none">
+        <h2>Admin / Agent Dashboard</h2>
+
+        <h5>Pending Policy Applications</h5>
+        <div id="adminPolicies" class="mb-4">
+          <div class="card mb-2 p-3">
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Coverage:</strong> Standard</p>
+            <button class="btn btn-success btn-sm me-2" onclick="approvePolicy('John Doe')">Approve</button>
+            <button class="btn btn-danger btn-sm" onclick="rejectPolicy('John Doe')">Reject</button>
+          </div>
+        </div>
+        
+        <h5>Pending Claims</h5>
+        <div id="adminClaims">
+          <div class="card mb-2 p-3">
+            <p><strong>User:</strong> Sarah Smith</p>
+            <p><strong>Description:</strong> Water damage in kitchen</p>
+            <button class="btn btn-success btn-sm me-2" onclick="approveClaim('Sarah Smith')">Approve</button>
+            <button class="btn btn-danger btn-sm" onclick="rejectClaim('Sarah Smith')">Reject</button>
+          </div>
+        </div>
+        
+        <p id="adminStatus" class="mt-3 text-muted"></p>
+        
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Toggle sections
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function () {
+        const id = this.getAttribute('href').substring(1)
+        document.querySelectorAll('.section').forEach(sec => sec.classList.add('d-none'))
+        document.getElementById(id).classList.remove('d-none')
+      })
+    })
+  </script>
+</body>
+</html>

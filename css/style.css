@@ -1,0 +1,17 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+  }
+  
+  .section {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: #003a70; /* Allstate blue */
+  }
+  
